@@ -1,0 +1,22 @@
+
+For random images: https://picsum.photos/
+                   http://placekitten.com/ 
+
+To serve the index page: serve -s ./
+
+serve is HTTP server which has been installed as a global npm module
+
+Important:
+----------
+Native image lazyload with loading="lazy" works only on FF, Chrome.
+You have to specify width and height in img for it to work
+Works in both direction - down and up
+
+References:
+------------
+https://web.dev/native-lazy-loading/
+
+Demo:
+------
+https://mathiasbynens.be/demo/img-loading-lazy
+

@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+        <meta name="description" content="Lazy Load images with JavaScript">
+
+        <style>
+            img {
+                display: block;
+                margin-bottom: 10px;
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Lazy Load images with JS</h1>
+        <!-- above the fold so load normally -->
+        <img id="someImg" data-test="some data" src='https://placekitten.com/400/400' width='400' height='400' alt=''>
+
+        <!-- below the fold example, lazy load -->
+        <!-- Browsewr that does not support loading='lazy' will ignore-->
+        <img loading='lazy' data-src='https://placekitten.com/401' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/402' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/403' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/404' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/405' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/406' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/407' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/408' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/409' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/410' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/411' width='400' height='400' class="lazyload">
+        <img loading='lazy' data-src='https://placekitten.com/412' width='400' height='400' class="lazyload">
+
+
+        <script>
+            var img = document.getElementById("someImg");
+            console.log(img.dataset.test); //html5 data attribute
+            console.log(img instanceof HTMLImageElement);
+
+            //feature detect native lazyloading
+            //safari does not support native lazyload
+            if('loading' in HTMLImageElement.prototype) {
+                var images = document.querySelectorAll('.lazyload');
+                console.log(images);
+                images.forEach((img) => {
+                    img.src = img.dataset.src;
+                });
+            }
+             else {
+                //use lazysizes library
+                var script = document.createElement('script');
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js";
+                document.body.appendChild(script);
+             }
+        </script>
+    </body>
+</html>

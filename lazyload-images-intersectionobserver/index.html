@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Using IntersectionObserver to lazyload images">
+
+        <style>
+            img {
+                display: block;
+                margin-bottom: 10px;
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Lazyload using Intersection Observer</h1>
+
+        <img data-src='https://placekitten.com/401' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/402' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/403' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/404' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/405' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/406' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/407' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/408' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/409' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/410' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/411' width='400' height='400' class="lazyload">
+        <img data-src='https://placekitten.com/412' width='400' height='400' class="lazyload">
+
+        <script>
+            /** 
+             * Lazyload using IntersectionObserver
+             * Idea is when the image element enters viewport, replace data-src with src
+            */
+            
+            var images = document.querySelectorAll('img.lazyload');
+            console.log(images);
+
+            const handleDOMLoad = () => {
+                console.log('DOM loaded');
+                //check
+                if('IntersectionObserver' in window) {
+                    //detect if it enters viewport
+                    var imageObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach((entry) => {
+                            if(entry.isIntersecting) {
+                                console.log('inside viewport');
+                                var image = entry.target;
+                                image.src = image.dataset.src;
+                                imageObserver.unobserve(image);
+                            } else {
+                                console.log('outside viewport');
+                            }
+                            
+                        });
+                    });
+
+                    //observe each image
+                    images.forEach((image) => {
+                        imageObserver.observe(image);
+                    });
+                }
+            }
+            
+            //dom load event on document
+            document.addEventListener('DOMContentLoaded', handleDOMLoad, false);
+        </script>
+    </body>
+</html>

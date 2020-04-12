@@ -1,0 +1,23 @@
+
+For random images: https://picsum.photos/
+                   http://placekitten.com/ 
+
+To serve the index page: serve -s ./
+
+serve is HTTP server which has been installed as a global npm module
+
+Important:
+----------
+Here I feature detect native image lazyload. If supported use
+Or else use lazysizes JS library
+
+lazysizes library needs data-src="image path" and class="lazyload" to be defined inside image
+
+References:
+------------
+https://web.dev/native-lazy-loading/
+
+Demo:
+------
+https://lazy-loading.firebaseapp.com/lazy_loading_native.html
+
